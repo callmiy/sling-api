@@ -41,6 +41,7 @@ defmodule Sling.Mixfile do
      {:corsica, "~> 0.3.0"},
      {:scrivener_ecto, "~> 1.2.2"},
      {:ex_machina, "~> 2.0", only: [:test]},
+     {:credo, "~> 0.8.4", only: [:test, :dev]},
    ]
   end
 
