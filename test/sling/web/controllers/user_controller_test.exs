@@ -19,17 +19,20 @@ defmodule Sling.Web.UserControllerTest do
     }
   end
 
-  test "creates user and renders user when data is valid", %{conn: conn, create_attrs: create_attrs} do
+  test "creates user and renders user when data is valid",
+      %{conn: conn, create_attrs: create_attrs} do
     conn = post conn, user_path(conn, :create), create_attrs
     assert %{"id" => _id} = json_response(conn, 201)["data"]
   end
 
-  test "does not create user and renders errors when data is invalid", %{conn: conn, invalid_attrs: invalid_attrs} do
+  test "does not create user and renders errors when data is invalid",
+      %{conn: conn, invalid_attrs: invalid_attrs} do
     conn = post conn, user_path(conn, :create), invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  test "gets user rooms when rooms with user exists", %{conn: conn, create_attrs: create_attrs} do
+  test "gets user rooms when rooms with user exists",
+      %{conn: conn, create_attrs: create_attrs} do
     %{user: user, room: room} = UserRoomsHelper.fixture()
     %{jwt: jwt} = ConnHelper.login_user(conn, create_attrs)
     logged_in_conn = conn

@@ -27,13 +27,16 @@ defmodule Sling.UserRoomsTest do
   end
 
   # test "create_user_room/1 with invalid data returns error changeset" do
-  #   assert {:error, %Ecto.Changeset{}} = UserRooms.create_user_room(@invalid_attrs)
+  #   assert {:error, %Ecto.Changeset{}} =
+        # UserRooms.create_user_room(@invalid_attrs)
   # end
 
   test "delete_user_room/1 deletes the user_room" do
     %{user_room: user_room} = Helper.fixture()
     assert {:ok, %UserRoom{}} = UserRooms.delete_user_room(user_room)
-    assert_raise Ecto.NoResultsError, fn -> UserRooms.get_user_room!(user_room.id) end
+    assert_raise Ecto.NoResultsError, fn ->
+      UserRooms.get_user_room!(user_room.id)
+    end
   end
 
   test "change_user_room/1 returns a user_room changeset" do

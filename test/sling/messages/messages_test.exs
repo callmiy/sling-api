@@ -11,7 +11,8 @@ defmodule Sling.MessagesTest do
     assert Messages.list_messages() == [message]
   end
 
-  test "users_and_msg_for_room/1 returns the room with all users and messages they have created in the room" do
+  test "users_and_msg_for_room/1 returns the room with all users and messages
+      they have created in the room" do
     %{room: room, message: message, user: user} = Helper.fixture()
     room_id = room.id
     message_id = message.id
@@ -26,7 +27,8 @@ defmodule Sling.MessagesTest do
     } = Messages.users_and_msg_for_room(room.id)
   end
 
-  test "users_and_msg_for_room/1 returns only the room when no messages have been created in the room" do
+  test "users_and_msg_for_room/1 returns only the room when no messages have
+      been created in the room" do
     {_user, room} = Helper.fixture(:user_room)
 
     assert %{
@@ -38,6 +40,8 @@ defmodule Sling.MessagesTest do
 
   test "creates message given a room struct and user id" do
     {user, room} = Helper.fixture(:user_room)
-    assert {:ok, %Message{}} = Messages.create_message room, user.id, Helper.text()
+    assert {:ok, %Message{}} = Messages.create_message(
+      room, user.id, Helper.text()
+    )
   end
 end

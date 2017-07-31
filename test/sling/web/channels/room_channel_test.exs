@@ -25,12 +25,14 @@ defmodule Sling.Web.RoomChannelTest do
       assert_reply ref, :ok
     end
 
-    test "new_message fails and replies with status error and changeset", %{socket: socket} do
+    test "new_message fails and replies with status error and changeset",
+        %{socket: socket} do
       ref = push socket, "new_message", %{}
       assert_reply ref, :error, %{errors: _}
     end
 
-    test "message_created broadcasts are pushed to the client", %{socket: socket} do
+    test "message_created broadcasts are pushed to the client",
+        %{socket: socket} do
       user_id = socket.assigns.current_user.id
       {:ok, message} = Messages.create_message(
         socket.assigns.room,
@@ -61,7 +63,8 @@ defmodule Sling.Web.RoomChannelTest do
       {:ok, socket: socket}
     end
 
-    test "'load rooms' succeeds and replies with status ok and requested rooms", %{socket: socket} do
+    test "'load rooms' succeeds and replies with status ok and requested rooms",
+        %{socket: socket} do
       room = RoomHelper.fixture()
       room_id = room.id
       ref = push socket, "load rooms", %{}
@@ -71,7 +74,8 @@ defmodule Sling.Web.RoomChannelTest do
       }
     end
 
-    test "'new room' creates new room and new user room, replies with status ok and created room id, and broadcasts created room", %{socket: socket} do
+    test "'new room' creates new room and new user room, replies with status ok
+        and created room id, and broadcasts created room", %{socket: socket} do
       attrs = RoomHelper.valid_attrs()
       ref = push socket, "new room", attrs
       task = Task.async(fn ->
@@ -89,7 +93,9 @@ defmodule Sling.Web.RoomChannelTest do
       }
     end
 
-    test "'new room' gets existing room and creates new user room, replies with status ok and fetched room id, and broadcasts fetched room", %{socket: socket} do
+    test "'new room' gets existing room and creates new user room, replies with
+        status ok and fetched room id, and broadcasts fetched room",
+        %{socket: socket} do
       room = RoomHelper.fixture()
       room_id = room.id
       ref = push socket, "new room", %{"id" => room_id}
@@ -100,7 +106,8 @@ defmodule Sling.Web.RoomChannelTest do
       }}
     end
 
-    test "'new room' fails and replies with status error and changeset", %{socket: socket} do
+    test "'new room' fails and replies with status error and changeset",
+        %{socket: socket} do
       ref = push socket, "new room", RoomHelper.invalid_attrs()
       assert_reply ref, :error, %{errors: _}
     end
