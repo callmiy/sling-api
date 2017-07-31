@@ -8,8 +8,12 @@ defmodule Sling.Web.RoomChannel do
   alias Sling.Web.Presence
   alias Sling.Users
 
-  def join("rooms:utils", _, socket) do
-    {:ok, socket}
+  def join("rooms:utils", params, socket) do
+    response = %{
+      user_rooms: render_user_rooms(socket.assigns.current_user.id),
+      rooms: render_rooms_list(params),
+    }
+    {:ok, response, socket}
   end
 
   def join("rooms:" <> room_id, _payload, socket) do
@@ -51,7 +55,8 @@ defmodule Sling.Web.RoomChannel do
 
   def handle_in("new room", params, socket) do
     with {:ok, created_room} <- create_room(
-                                  socket.assigns.current_user.id, params
+                                  socket.assigns.current_user.id,
+                                  params
                                 ) do
       broadcast(socket, "room created", created_room)
       {:reply, {:ok, %{room_id: created_room.data.id}}, socket}

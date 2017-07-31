@@ -7,10 +7,19 @@ defmodule Sling.Web.RoomChannel.Helper do
   alias Sling.Web.ChangesetView
   alias Sling.Web.MessageView
   alias Sling.Web.RoomView
+  alias Sling.Web.UserRoomView
   alias Sling.Rooms
   alias Sling.UserRooms
   alias Sling.Messages
   alias Sling.Rooms.Room
+
+  def render_user_rooms(id) do
+    render(
+      UserRoomView,
+      "list_rooms_for_user.json",
+      UserRooms.list_rooms_for_user(id)
+    )
+  end
 
   def render_users_and_msg_for_room(room_id) do
     %{
@@ -48,11 +57,13 @@ defmodule Sling.Web.RoomChannel.Helper do
 
   def create_room(id, %{"id" => room_id}) do
     room = Rooms.get_room!(room_id)
-    with {:ok, _} <- UserRooms.create_user_room(%{user_id: id, room_id: room.id}) do
+    with {:ok, _} <- UserRooms.create_user_room(
+                      %{user_id: id, room_id: room.id}
+                    ) do
       create_room(:ok, :joined, id, room)
     else
       {:error, changeset} ->
-          create_room(:respond, :error, changeset)
+        create_room(:respond, :error, changeset)
     end
   end
   def create_room(id, room_params) do
@@ -64,7 +75,7 @@ defmodule Sling.Web.RoomChannel.Helper do
       create_room(:ok, :new, id, room)
     else
       {:error, changeset} ->
-          create_room(:respond, :error, changeset)
+        create_room(:respond, :error, changeset)
     end
   end
   defp create_room(:ok, status, id, room) do
