@@ -15,7 +15,9 @@ defmodule Sling.Web.RoomController do
   def create(conn, %{"id" => room_id}) do
     user = Guardian.Plug.current_resource(conn)
     room = Rooms.get_room!(room_id)
-    with {:ok, _} <- UserRooms.create_user_room(%{user_id: user.id, room_id: room.id}) do
+    with {:ok, _} <- UserRooms.create_user_room(
+                      %{user_id: user.id, room_id: room.id}
+                    ) do
       conn
       |> put_status(:created)
       |> render("show.json", room: room)
@@ -24,7 +26,9 @@ defmodule Sling.Web.RoomController do
   def create(conn, room_params) do
     user = Guardian.Plug.current_resource(conn)
     with {:ok, %Room{} = room} <- Rooms.create_room(room_params),
-         {:ok, _} <- UserRooms.create_user_room(%{user_id: user.id, room_id: room.id}) do
+         {:ok, _}              <- UserRooms.create_user_room(
+                                    %{user_id: user.id, room_id: room.id}
+                                  ) do
       conn
       |> put_status(:created)
       |> render("show.json", room: room)

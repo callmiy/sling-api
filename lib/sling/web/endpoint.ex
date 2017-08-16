@@ -38,7 +38,8 @@ defmodule Sling.Web.Endpoint do
     key: "_sling_key",
     signing_salt: "NBWPwNEM"
 
-  plug Corsica, origins: "*", allow_headers: ~w(Accept Content-Type Authorization Origin)
+  plug Corsica, origins: "*",
+    allow_headers: ~w(Accept Content-Type Authorization Origin)
   plug Sling.Web.Router
 
   @doc """

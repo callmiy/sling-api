@@ -1,4 +1,6 @@
 defmodule Sling.Users.User do
+  @moduledoc false
+
   use Ecto.Schema
 
   import Ecto.Changeset
@@ -7,7 +9,6 @@ defmodule Sling.Users.User do
   alias Sling.Users.User
   alias Sling.Rooms.Room
   alias Sling.Messages.Message
-
 
   schema "users" do
     field :email, :string
@@ -41,7 +42,7 @@ defmodule Sling.Users.User do
 
   def registration_changeset(%User{} = user, params \\ %{}) do
     user
-    |>changeset(params)
+    |> changeset(params)
     |> cast(params, [:password])
     |> validate_required([:password])
     |> hashpw()

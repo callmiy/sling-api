@@ -1,9 +1,10 @@
 defmodule Sling.Rooms.UserRoom do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Sling.Rooms.{UserRoom, Room}
   alias Sling.Users.User
-
 
   schema "user_rooms" do
     belongs_to :user, User

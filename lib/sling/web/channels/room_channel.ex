@@ -1,4 +1,6 @@
 defmodule Sling.Web.RoomChannel do
+  @moduledoc false
+
   use Sling.Web, :channel
   import Phoenix.View, only: [render: 3]
   import Sling.Web.RoomChannel.Helper
@@ -24,9 +26,7 @@ defmodule Sling.Web.RoomChannel do
 
   def handle_info(:after_room_join, socket) do
     Presence.track(
-      socket,
-      :users,
-      Users.render_user(socket.assigns.current_user)
+      socket, :users, Users.render_user(socket.assigns.current_user)
     )
 
     push socket, "presence_state", Presence.list(socket)

@@ -1,10 +1,11 @@
 defmodule Sling.Rooms.Room do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Sling.Rooms.Room
   alias Sling.Users.User
   alias Sling.Messages.Message
-
 
   schema "rooms" do
     field :name, :string

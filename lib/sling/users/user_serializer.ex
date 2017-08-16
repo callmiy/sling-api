@@ -1,4 +1,6 @@
 defmodule Sling.Users.UserSerializer do
+  @moduledoc false
+
   @behaviour Guardian.Serializer
 
   alias Sling.Users

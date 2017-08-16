@@ -1,4 +1,6 @@
 defmodule Sling.Pagination do
+  @moduledoc false
+
   def paginate(page), do: %{
     page_number: page.page_number,
     page_size: page.page_size,

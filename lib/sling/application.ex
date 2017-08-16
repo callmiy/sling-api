@@ -1,4 +1,6 @@
 defmodule Sling.Application do
+  @moduledoc false
+
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -12,7 +14,8 @@ defmodule Sling.Application do
       supervisor(Sling.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Sling.Web.Endpoint, []),
-      # Start your own worker by calling: Sling.Worker.start_link(arg1, arg2, arg3)
+      # Start your own worker by calling: Sling.Worker.start_link(arg1, arg2,
+      #  arg3)
       # worker(Sling.Worker, [arg1, arg2, arg3]),
       supervisor(Sling.Web.Presence, []),
     ]
