@@ -23,8 +23,12 @@ defmodule Sling.Web.RoomChannel do
   end
 
   def handle_info(:after_room_join, socket) do
-    Presence.track(socket, :users, Users.render_user(socket.assigns.current_user)
+    Presence.track(
+      socket,
+      :users,
+      Users.render_user(socket.assigns.current_user)
     )
+
     push socket, "presence_state", Presence.list(socket)
     {:noreply, socket}
   end
@@ -41,9 +45,13 @@ defmodule Sling.Web.RoomChannel do
       {:error, changeset} ->
         {
           :reply,
-          {:error, render(ChangesetView, "error.json", changeset: changeset)},
+          {
+            :error,
+            render(ChangesetView, "error.json", changeset: changeset)
+          },
           socket
         }
+
       _ ->
         {:reply, :unknown_error, socket}
     end
