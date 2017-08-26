@@ -9,7 +9,7 @@ defmodule Sling.Web.Endpoint do
   plug Plug.Static,
   at: "/",
   # from: {:phoenix_graphql, "client/build/"},
-  from:  Path.expand("web-client/build/"),
+  from:  "web-client/build/",
   # only: ~w(index.html favicon.ico static service-worker.js)
   only_matching: ~w(index.html favicon.ico robots.txt static service)
 
