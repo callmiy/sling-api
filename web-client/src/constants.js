@@ -66,6 +66,10 @@ export const CREATE_NEW_MESSAGE = 'CREATE_NEW_MESSAGE';
 export const CHANNEL_EVENT_MESSAGE_CREATED = 'message_created';
 export const CHANNEL_EVENT_LOAD_ROOMS = 'load rooms';
 export const getWebSocketUrl = () => {
+  if (API_URL === '') {
+    return '';
+  }
+
   const httpHost = /https?/.exec(API_URL)[0];
   const websocketHost = httpHost === 'https' ? 'wss' : 'ws';
   return API_URL

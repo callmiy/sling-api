@@ -39,7 +39,7 @@ export default class Root extends Component {
 
     return (
       <Provider store={store}>
-        <Router basename={BASE_NAME}>
+        <Router>
           <Switch>
             <AuthRequired
               isAuthenticated={isAuthenticated}
