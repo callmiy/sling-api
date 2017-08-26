@@ -3,13 +3,15 @@ defmodule Sling.Web.Endpoint do
 
   socket "/socket", Sling.Web.UserSocket
 
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phoenix.digest
-  # when deploying your static files in production.
+  plug Plug.Static.IndexHtml,
+  at: "/"
+
   plug Plug.Static,
-    at: "/", from: :sling, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+  at: "/",
+  # from: {:phoenix_graphql, "client/build/"},
+  from:  Path.expand("web-client/build/"),
+  # only: ~w(index.html favicon.ico static service-worker.js)
+  only_matching: ~w(index.html favicon.ico robots.txt static service)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

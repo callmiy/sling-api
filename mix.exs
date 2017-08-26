@@ -42,6 +42,7 @@ defmodule Sling.Mixfile do
      {:scrivener_ecto, "~> 1.2.2"},
      {:ex_machina, "~> 2.0", only: [:test]},
      {:credo, "~> 0.8.4", only: [:test, :dev]},
+     {:plug_static_index_html, "~> 1.0"},
    ]
   end
 

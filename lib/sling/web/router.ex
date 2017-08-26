@@ -20,11 +20,6 @@ defmodule Sling.Web.Router do
     plug Guardian.Plug.EnsureAuthenticated, handler: Sling.Web.SessionController
   end
 
-  scope "/", Sling.Web do
-    pipe_through :browser # Use the default browser stack
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
   scope "/api", Sling.Web do
     pipe_through :api
