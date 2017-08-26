@@ -46,7 +46,9 @@ export const FETCH_USER_ROOMS_FAILED = 'FETCH_USER_ROOMS_FAILED';
 export const CREATE_ROOM_SUCCESS = 'CREATE_ROOM_SUCCESS';
 export const ROOM_JOINED = 'ROOM_JOINED';
 export const NEW_ROOM_FORM_NAME = 'newRoom';
-export const API_URL = process.env.REACT_APP_API_URL || '';
+export const API_URL = process.env.NODE_ENV !== 'production' ?
+  process.env.REACT_APP_API_URL :
+  '/api';
 export const SOCKET_CONNECTED = 'SOCKET_CONNECTED';
 export const NEW_MESSAGE_FORM = 'newMessage';
 export const ROOM_TOPIC_FORM = 'roomTopicForm';
@@ -66,7 +68,7 @@ export const CREATE_NEW_MESSAGE = 'CREATE_NEW_MESSAGE';
 export const CHANNEL_EVENT_MESSAGE_CREATED = 'message_created';
 export const CHANNEL_EVENT_LOAD_ROOMS = 'load rooms';
 export const getWebSocketUrl = () => {
-  if (API_URL === '') {
+  if (API_URL === '/api') {
     return '';
   }
 
