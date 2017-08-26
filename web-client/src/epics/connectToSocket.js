@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Socket } from 'phoenix';
 import {
-  getWebSocketUrl,
+  // getWebSocketUrl,
   CONNECT_TO_SOCKET,
 } from './../constants';
 import { readSession } from './../authManager';
@@ -16,7 +16,7 @@ import {
 
 const socketObservable = (user) =>
  Observable.create((observer: Object) => {
-   const socket = new Socket(`${getWebSocketUrl()}/socket`, { params: {
+   const socket = new Socket('/socket', { params: {
      token: readSession(),
    } });
 
