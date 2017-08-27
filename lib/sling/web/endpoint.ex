@@ -8,10 +8,10 @@ defmodule Sling.Web.Endpoint do
 
   plug Plug.Static,
   at: "/",
-  # from: {:phoenix_graphql, "client/build/"},
-  from:  "web-client/build/",
+  # from: {:phoenix_graphql, "web-client/"},
+  from:  "web-client/",
   # only: ~w(index.html favicon.ico static service-worker.js)
-  only_matching: ~w(index.html favicon.ico robots.txt static service)
+  only_matching: ~w(index.html favicon manifest robots.txt static service)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
